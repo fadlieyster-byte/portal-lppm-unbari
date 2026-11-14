@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="id"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Portal LPPM Universitas Batanghari Jambi</title>
+<style>
+*{box-sizing:border-box}body{margin:0;font-family:Inter,system-ui,Arial,sans-serif;background:#f3f6f2;color:#17251b}
+header{background:#0d4a2b;color:#fff;padding:14px 18px;position:sticky;top:0;z-index:10;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px}
+header h1{font-size:19px;margin:0}header p{margin:2px 0 0;font-size:12px;opacity:.85}
+nav{display:flex;gap:6px;flex-wrap:wrap;padding:12px 18px;background:#fff;border-bottom:1px solid #ddd;position:sticky;top:62px;z-index:9}
+nav button{border:1px solid #d7e2d9;background:#eef4ef;padding:9px 13px;border-radius:999px;cursor:pointer;font-weight:700}
+nav button.active{background:#0d4a2b;color:#fff}
+.wrap{max-width:1080px;margin:0 auto;padding:18px}
+.card{background:#fff;border:1px solid #e2e8e2;border-radius:16px;padding:18px;margin-bottom:16px;box-shadow:0 4px 16px rgba(0,0,0,.04)}
+.hero{background:linear-gradient(120deg,#0d4a2b,#166a3d);color:#fff;border-radius:20px;padding:28px}
+.hero h2{font-size:32px;margin:0 0 8px}.hero p{opacity:.9;line-height:1.6}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px}
+.stat{background:#fff;border-radius:14px;padding:16px;border:1px solid #e2e8e2}.stat b{font-size:28px;color:#0d4a2b}
+label{display:block;font-size:13px;font-weight:700;margin:12px 0 5px}input,select,textarea{width:100%;padding:11px;border:1px solid #ccd6ce;border-radius:10px;font:inherit}textarea{min-height:90px}
+.btn{background:#0d4a2b;color:#fff;border:0;padding:11px 16px;border-radius:10px;font-weight:800;cursor:pointer}
+.btn2{background:#f2c94c;color:#222;border:0;padding:11px 16px;border-radius:10px;font-weight:800;cursor:pointer}
+.btn-ghost{background:#fff;border:1px solid #ccc;padding:9px 12px;border-radius:10px;cursor:pointer}
+table{width:100%;border-collapse:collapse;font-size:13px}th,td{border-bottom:1px solid #eee;padding:10px;text-align:left;vertical-align:top}
+.badge{display:inline-block;padding:4px 9px;border-radius:999px;background:#e8f5ec;font-size:12px;font-weight:800}
+.flex{display:flex;gap:8px;flex-wrap:wrap;align-items:center}.muted{color:#666;font-size:13px;line-height:1.6}
+#toast{position:fixed;right:16px;bottom:16px;background:#111;color:#fff;padding:12px 16px;border-radius:12px;display:none;z-index:99}
+.search{max-width:340px}details{margin:8px 0}.filebox{border:1px dashed #aaa;padding:12px;border-radius:10px;background:#fafafa}
+@media(max-width:640px){.hero h2{font-size:26px}nav{top:98px}}
+</style></head><body>
+<header><div><h1>🌿 Portal LPPM Unbari</h1><p>Lembaga Penelitian dan Pengabdian kepada Masyarakat • Universitas Batanghari Jambi<br>Jl. Slamet Riyadi, Broni-Jambi 36122 • lppm@unbari.ac.id</p></div>
+<div class="flex"><span id="userLabel" class="muted" style="color:#fff">Belum login</span><button class="btn2" onclick="openLogin()">Login</button><button class="btn-ghost" onclick="logout()">Logout</button></div></header>
+<nav>
+<button data-tab="home" class="active" onclick="show('home',this)">Beranda</button>
+<button data-tab="proposal" onclick="show('proposal',this)">Pengajuan Proposal</button>
+<button data-tab="dash" onclick="show('dash',this)">Dashboard / Tracking</button>
+<button data-tab="kegiatan" onclick="show('kegiatan',this)">Penelitian & Pengabdian</button>
+<button data-tab="publikasi" onclick="show('publikasi',this)">Publikasi & Jurnal</button>
+<button data-tab="kkn" onclick="show('kkn',this)">KKN</button>
+<button data-tab="agenda" onclick="show('agenda',this)">Agenda</button>
+<button data-tab="profil" onclick="show('profil',this)">Profil & Kontak</button>
+</nav>
+<div class="wrap">
+
+<section id="home">
+<div class="card hero"><h2>Tridharma untuk Jambi yang Mandiri</h2><p>Portal ini untuk pengajuan proposal penelitian & pengabdian, tracking Monev, publikasi jurnal, pendaftaran KKN, dan agenda LPPM Universitas Batanghari Jambi. Data tersimpan di browser (localStorage) — bisa dibuka offline.</p>
+<div class="flex"><button class="btn2" onclick="show('proposal',document.querySelector('[data-tab=proposal]'))">+ Ajukan Proposal</button><button class="btn" style="background:#fff;color:#0d4a2b" onclick="show('kkn',document.querySelector('[data-tab=kkn]'))">Daftar KKN →</button></div></div>
+<div class="grid"><div class="stat"><b id="s1">0</b><div>Proposal diajukan</div></div><div class="stat"><b>128</b><div>Penelitian (contoh)</div></div><div class="stat"><b>96</b><div>Pengabdian (contoh)</div></div><div class="stat"><b id="s2">0</b><div>Pendaftar KKN</div></div></div>
+<div class="card"><h3>📢 Pengumuman</h3><ul><li><b>Pembukaan Proposal 2026</b> — Pengajuan Penelitian & Pengabdian dibuka. Lengkapi file proposal, RAB, dan surat pernyataan.</li><li><b>Monev Internal</b> — Tim LPPM akan melakukan monitoring & evaluasi capaian kegiatan dosen.</li><li><b>KKN Tematik Posdaya</b> — Pendaftaran mahasiswa dibuka, kuota terbatas per desa.</li></ul></div>
+<div class="card"><h3>Akun Demo</h3><p class="muted">Admin: admin@unbari.ac.id / admin123 • Dosen: dosen@unbari.ac.id / dosen123 • Mahasiswa: mahasiswa@unbari.ac.id / mhs123</p></div>
+</section>
+
+<section id="proposal" style="display:none"><div class="card"><h2>Pengajuan Proposal</h2>
+<label>Nama Ketua</label><input id="p_nama" placeholder="Nama lengkap">
+<label>NIDN</label><input id="p_nidn" placeholder="Contoh 001...">
+<label>Fakultas / Prodi</label><select id="p_fak"><option>Fakultas Hukum — Ilmu Hukum</option><option>Fakultas Ekonomi — Manajemen</option><option>Fakultas Keguruan dan Ilmu Pendidikan — Pendidikan</option><option>Fakultas Pertanian — Agroteknologi</option><option>Fakultas Teknik — Teknik Sipil</option></select>
+<label>Jenis</label><select id="p_jenis"><option>Penelitian</option><option>Pengabdian kepada Masyarakat</option></select>
+<label>Skema Pendanaan</label><select id="p_skema"><option>LPPM Unbari</option><option>Mandiri</option><option>Hibah Kemendiktisaintek</option><option>Mitra / Pemda</option></select>
+<label>Judul</label><input id="p_judul" placeholder="Judul penelitian / pengabdian">
+<label>Abstrak</label><textarea id="p_abstrak"></textarea>
+<div class="flex"><div style="flex:1"><label>Anggaran (Rp)</label><input id="p_anggaran" type="number" value="5000000"></div><div style="flex:1"><label>Durasi (bulan)</label><input id="p_durasi" type="number" value="6"></div></div>
+<label>Upload File Proposal (PDF/DOC/DOCX, maks 10MB)</label><div class="filebox"><input type="file" id="p_file" accept=".pdf,.doc,.docx"><div id="fileInfo" class="muted">Belum ada file dipilih.</div></div>
+<label>Upload RAB / Surat Pernyataan (opsional)</label><div class="filebox"><input type="file" id="p_file2" accept=".pdf,.doc,.docx,.xls,.xlsx"><div id="fileInfo2" class="muted">Belum ada file dipilih.</div></div>
+<br><button class="btn" onclick="saveProposal()">Simpan Proposal</button> <span class="muted">File tersimpan sebagai metadata + bisa diunduh kembali di Dashboard.</span>
+</div></section>
+
+<section id="dash" style="display:none"><div class="card"><h2>Dashboard / Tracking Proposal</h2>
+<div class="flex"><input class="search" id="q" placeholder="Cari judul / nama..." oninput="renderDash()"><select id="f_status" onchange="renderDash()"><option value="">Semua Status</option><option>Diajukan</option><option>Review</option><option>Revisi</option><option>Disetujui</option><option>Monev</option><option>Selesai</option></select>
+<button class="btn2" onclick="exportCSV()">⬇ Export Rekap Excel (CSV)</button><button class="btn-ghost" onclick="resetData()">Reset Data Contoh</button></div>
+<div style="overflow:auto"><table><thead><tr><th>Judul / Ketua</th><th>Jenis</th><th>Anggaran</th><th>File</th><th>Status</th><th>Aksi</th></tr></thead><tbody id="tbody"></tbody></table></div><p class="muted" id="dashNote"></p></div></section>
+
+<section id="kegiatan" style="display:none"><div class="card"><h2>Penelitian & Pengabdian</h2><input class="search" id="q2" placeholder="Cari kegiatan..." oninput="renderKegiatan()"><div id="kegList"></div></div></section>
+
+<section id="publikasi" style="display:none"><div class="card"><h2>Publikasi & Jurnal</h2>
+<p><b>Jurnal Ilmiah Universitas Batanghari Jambi (JIUBJ)</b> — e-ISSN 2549-4236, p-ISSN 1411-8939. Terbit Februari, Juli, Oktober.<br><b>Ekonomis: Journal of Economics and Business</b> — diterbitkan LPPM Unbari.</p>
+<label>Judul Publikasi</label><input id="pub_judul"><label>Penulis</label><input id="pub_penulis"><label>Jurnal</label><select id="pub_jurnal"><option>JIUBJ</option><option>Ekonomis</option><option>Jurnal Lain</option></select>
+<label>Upload PDF Artikel (opsional)</label><input type="file" id="pub_file" accept=".pdf"><br><br><button class="btn" onclick="savePub()">+ Tambah Publikasi</button> <button class="btn2" onclick="exportPub()">⬇ Export Publikasi (CSV)</button><div id="pubList"></div></div></section>
+
+<section id="kkn" style="display:none"><div class="card"><h2>KKN Tematik Posdaya</h2><p class="muted">Timeline: Pendaftaran → Pembekalan → Penerjunan → Monev → Penarikan. Pilih desa penempatan di bawah ini.</p>
+<label>Nama Mahasiswa</label><input id="k_nama"><label>NIM</label><input id="k_nim"><label>Prodi</label><input id="k_prodi" placeholder="Contoh: Manajemen"><label>Lokasi / Desa</label><select id="k_lokasi"><option>Desa Teluk Raya, Kumpe Ulu, Muaro Jambi</option><option>Desa Pinang Masak, Jambi</option><option>Desa Broni, Telanaipura</option><option>Desa Lainnya</option></select><br><br><button class="btn" onclick="saveKKN()">Daftar KKN</button> <button class="btn2" onclick="exportKKN()">⬇ Export Pendaftar KKN (CSV)</button><div id="kknList"></div></div></section>
+
+<section id="agenda" style="display:none"><div class="card"><h2>Agenda</h2><label>Judul Agenda</label><input id="a_judul"><label>Tanggal</label><input id="a_tgl" type="date"><label>Keterangan</label><input id="a_ket"><br><br><button class="btn" onclick="saveAgenda()">+ Tambah Agenda</button><div id="agendaList"></div></div></section>
+
+<section id="profil" style="display:none"><div class="card"><h2>Profil LPPM Unbari</h2><p><b>Lembaga Penelitian dan Pengabdian kepada Masyarakat (LPPM)</b> Universitas Batanghari Jambi melaksanakan Tridharma Perguruan Tinggi: pendidikan, penelitian, dan pengabdian kepada masyarakat.</p><p><b>Ketua LPPM:</b> Prof. Dr. Ir. Fachroerrozi Hoesni, MP (data publik)<br><b>Alamat:</b> Jl. Slamet Riyadi, Broni-Jambi, Kec. Telanaipura, Jambi 36122<br><b>Email:</b> lppm@unbari.ac.id • <b>Telp:</b> 0741-670700</p><h3>FAQ</h3><details><summary>Bagaimana cara mengajukan proposal?</summary><p>Buka menu Pengajuan Proposal, isi form, upload file, lalu klik Simpan.</p></details><details><summary>Siapa yang bisa mengubah status?</summary><p>Hanya Admin (login admin@unbari.ac.id / admin123).</p></details><details><summary>Apakah file bisa diunduh lagi?</summary><p>Ya, di Dashboard ada tombol Unduh untuk file yang diupload.</p></details></div></section>
+
+</div>
+<div id="toast"></div>
+<div id="loginModal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:100;align-items:center;justify-content:center"><div class="card" style="width:92%;max-width:420px;margin:auto"><h2>Login</h2><label>Email</label><input id="l_email" value="admin@unbari.ac.id"><label>Password</label><input id="l_pass" type="password" value="admin123"><label>Peran</label><select id="l_role"><option>Admin</option><option>Dosen</option><option>Mahasiswa</option></select><br><br><button class="btn" onclick="doLogin()">Masuk</button> <button class="btn-ghost" onclick="closeLogin()">Batal</button><p class="muted">Demo: admin@unbari.ac.id/admin123 • dosen@unbari.ac.id/dosen123 • mahasiswa@unbari.ac.id/mhs123</p></div></div>
+<script>
+let DB=JSON.parse(localStorage.getItem('lppm_unbari_v1')||'null')||{proposals:[{nama:'Dr. Contoh, M.Si',nidn:'001',fak:'Fakultas Ekonomi — Manajemen',jenis:'Penelitian',skema:'LPPM Unbari',judul:'Pemberdayaan UKM Batik Pinang Masak Berbasis Digital',abstrak:'Contoh proposal.',anggaran:7500000,durasi:6,status:'Review',tgl:new Date().toLocaleDateString('id-ID'),files:[]}],pubs:[{judul:'Analisis Pengaruh Media Sosial terhadap Kinerja Dosen',penulis:'Venny Yusiana',jurnal:'Ekonomis',file:''}],kkn:[],agenda:[{judul:'Monev Internal Penelitian & Pengabdian',tgl:'2026-11-20',ket:'Ruang LPPM Unbari'}]};
+let user=JSON.parse(localStorage.getItem('lppm_user')||'null');
+let pendingFiles=[];
+function persist(){localStorage.setItem('lppm_unbari_v1',JSON.stringify(DB));localStorage.setItem('lppm_user',JSON.stringify(user));}
+function toast(m){let t=document.getElementById('toast');t.textContent=m;t.style.display='block';setTimeout(()=>t.style.display='none',2600)}
+function show(id,btn){document.querySelectorAll('section').forEach(s=>s.style.display='none');document.getElementById(id).style.display='block';document.querySelectorAll('nav button').forEach(b=>b.classList.remove('active'));if(btn)btn.classList.add('active');if(id=='dash')renderDash();if(id=='kegiatan')renderKegiatan();if(id=='publikasi')renderPub();if(id=='kkn')renderKKN();if(id=='agenda')renderAgenda();updateStats();}
+function updateStats(){document.getElementById('s1').textContent=DB.proposals.length;document.getElementById('s2').textContent=DB.kkn.length;document.getElementById('userLabel').textContent=user?user.email+' ('+user.role+')':'Belum login';}
+function openLogin(){document.getElementById('loginModal').style.display='flex'}function closeLogin(){document.getElementById('loginModal').style.display='none'}
+function doLogin(){let e=document.getElementById('l_email').value,p=document.getElementById('l_pass').value,r=document.getElementById('l_role').value;let ok=(e=='admin@unbari.ac.id'&&p=='admin123'&&r=='Admin')||(e=='dosen@unbari.ac.id'&&p=='dosen123'&&r=='Dosen')||(e=='mahasiswa@unbari.ac.id'&&p=='mhs123'&&r=='Mahasiswa');if(!ok)return toast('Login gagal — cek email/password/peran demo');user={email:e,role:r};persist();closeLogin();updateStats();toast('Login berhasil sebagai '+r);}
+function logout(){user=null;persist();updateStats();toast('Logout berhasil');}
+function fileToData(f,cb){if(!f)return cb(null);if(f.size>10*1024*1024)return toast('File >10MB');let rd=new FileReader();rd.onload=()=>cb({name:f.name,size:f.size,type:f.type,data:rd.result});rd.readAsDataURL(f);}
+document.getElementById('p_file').addEventListener('change',e=>{let f=e.target.files[0];document.getElementById('fileInfo').textContent=f?f.name+' ('+Math.round(f.size/1024)+' KB)':'Belum ada file';});
+document.getElementById('p_file2').addEventListener('change',e=>{let f=e.target.files[0];document.getElementById('fileInfo2').textContent=f?f.name+' ('+Math.round(f.size/1024)+' KB)':'Belum ada file';});
+function saveProposal(){let j=document.getElementById('p_judul').value.trim(),n=document.getElementById('p_nama').value.trim();if(!j||!n)return toast('Isi Nama Ketua & Judul dulu');let f1=document.getElementById('p_file').files[0],f2=document.getElementById('p_file2').files[0];fileToData(f1,a=>{fileToData(f2,b=>{let files=[];if(a)files.push(a);if(b)files.push(b);DB.proposals.unshift({nama:n,nidn:document.getElementById('p_nidn').value,fak:document.getElementById('p_fak').value,jenis:document.getElementById('p_jenis').value,skema:document.getElementById('p_skema').value,judul:j,abstrak:document.getElementById('p_abstrak').value,anggaran:+document.getElementById('p_anggaran').value||0,durasi:+document.getElementById('p_durasi').value||0,status:'Diajukan',tgl:new Date().toLocaleDateString('id-ID'),files});persist();toast('Proposal berhasil disimpan');document.getElementById('p_judul').value='';show('dash',document.querySelector('[data-tab=dash]'));});});}
+function renderDash(){let q=(document.getElementById('q').value||'').toLowerCase(),st=document.getElementById('f_status').value;let list=DB.proposals.filter(p=>(!q||(p.judul+p.nama).toLowerCase().includes(q))&&(!st||p.status==st));document.getElementById('tbody').innerHTML=list.map((p,i)=>{let idx=DB.proposals.indexOf(p);let files=(p.files||[]).map((f,fi)=>`<a href="#" onclick="dl(${idx},${fi});return false">⬇ ${f.name}</a>`).join('<br>')||'-';let canAdmin=user&&user.role=='Admin';return `<tr><td><b>${p.judul}</b><br><span class="muted">${p.nama} • ${p.fak}</span></td><td>${p.jenis}</td><td>Rp ${p.anggaran.toLocaleString('id-ID')}</td><td>${files}</td><td><span class="badge">${p.status}</span></td><td><div class="flex">${canAdmin?`<select onchange="setStatus(${idx},this.value)"><option>${p.status}</option><option>Diajukan</option><option>Review</option><option>Revisi</option><option>Disetujui</option><option>Monev</option><option>Selesai</option></select>`:''}<button class="btn-ghost" onclick="delProp(${idx})">Hapus</button></div></td></tr>`}).join('')||'<tr><td colspan=6>Tidak ada proposal.</td></tr>';document.getElementById('dashNote').textContent=canAdminMsg();}
+function canAdminMsg(){return user&&user.role=='Admin'?'Mode Admin: kamu bisa mengubah status.':'Login sebagai Admin untuk mengubah status (admin@unbari.ac.id / admin123).';}
+function setStatus(i,v){DB.proposals[i].status=v;persist();renderDash();toast('Status diubah ke '+v);}
+function delProp(i){if(!confirm('Hapus proposal ini?'))return;DB.proposals.splice(i,1);persist();renderDash();toast('Proposal dihapus');}
+function dl(i,fi){let f=DB.proposals[i].files[fi];let a=document.createElement('a');a.href=f.data;a.download=f.name;a.click();}
+function exportCSV(){let rows=[['No','Judul','Ketua','NIDN','Fakultas/Prodi','Jenis','Skema','Anggaran','Durasi','Status','Tanggal','File']];DB.proposals.forEach((p,i)=>rows.push([i+1,p.judul,p.nama,p.nidn,p.fak,p.jenis,p.skema,p.anggaran,p.durasi,p.status,p.tgl,(p.files||[]).map(f=>f.name).join(' | ')]));downloadCSV(rows,'rekap-proposal-lppm-unbari');}
+function downloadCSV(rows,name){let csv='\ufeff'+rows.map(r=>r.map(c=>'"'+String(c).replace(/"/g,'""')+'"').join(';')).join('\n');let b=new Blob([csv],{type:'text/csv;charset=utf-8'});let a=document.createElement('a');a.href=URL.createObjectURL(b);a.download=name+'-'+new Date().toISOString().slice(0,10)+'.csv';a.click();toast('Rekap berhasil diunduh');}
+function resetData(){if(!confirm('Reset ke data contoh?'))return;localStorage.removeItem('lppm_unbari_v1');location.reload();}
+let keg=[{t:'KKN Tematik Posdaya',k:'Pengabdian',d:'KKN tematik pemberdayaan masyarakat di desa mitra Jambi.'},{t:'Pemberdayaan UKM Batik Pinang Masak',k:'Pengabdian',d:'Pelatihan green teknologi & digital entrepreneur untuk pengrajin batik.'},{t:'Penyuluhan Hukum untuk Masyarakat',k:'Pengabdian',d:'Penyuluhan hukum sebagai wujud pemahaman hukum masyarakat.'},{t:'PKM KKN Tematik Desa Teluk Raya',k:'Pengabdian',d:'Kegiatan PKM KKN Tematik di Desa Teluk Raya, Kumpe Ulu.'},{t:'Candi Muara Jambi sebagai Destinasi Riset',k:'Penelitian',d:'Riset sejarah & pariwisata budaya Jambi.'}];
+function renderKegiatan(){let q=(document.getElementById('q2').value||'').toLowerCase();document.getElementById('kegList').innerHTML=keg.filter(x=>(x.t+x.d).toLowerCase().includes(q)).map(x=>`<div class="card"><b>${x.t}</b> <span class="badge">${x.k}</span><p class="muted">${x.d}</p></div>`).join('');}
+function savePub(){let j=document.getElementById('pub_judul').value.trim();if(!j)return toast('Isi judul publikasi');let f=document.getElementById('pub_file').files[0];fileToData(f,a=>{DB.pubs.unshift({judul:j,penulis:document.getElementById('pub_penulis').value,jurnal:document.getElementById('pub_jurnal').value,file:a?a.name:''});persist();renderPub();toast('Publikasi ditambahkan');});}
+function renderPub(){document.getElementById('pubList').innerHTML=DB.pubs.map(p=>`<div class="card"><b>${p.judul}</b><br><span class="muted">${p.penulis} • ${p.jurnal} ${p.file?'• 📄 '+p.file:''}</span></div>`).join('')||'<p class="muted">Belum ada publikasi.</p>';}
+function exportPub(){downloadCSV([['No','Judul','Penulis','Jurnal','File']].concat(DB.pubs.map((p,i)=>[i+1,p.judul,p.penulis,p.jurnal,p.file||''])),'rekap-publikasi-lppm-unbari');}
+function saveKKN(){let n=document.getElementById('k_nama').value.trim(),nim=document.getElementById('k_nim').value.trim();if(!n||!nim)return toast('Isi Nama & NIM');DB.kkn.unshift({nama:n,nim,prodi:document.getElementById('k_prodi').value,lokasi:document.getElementById('k_lokasi').value,tgl:new Date().toLocaleDateString('id-ID')});persist();renderKKN();updateStats();toast('Pendaftaran KKN berhasil');}
+function renderKKN(){document.getElementById('kknList').innerHTML=DB.kkn.map(p=>`<div class="card"><b>${p.nama}</b> — ${p.nim}<br><span class="muted">${p.prodi} • ${p.lokasi} • ${p.tgl}</span></div>`).join('')||'<p class="muted">Belum ada pendaftar.</p>';}
+function exportKKN(){downloadCSV([['No','Nama','NIM','Prodi','Lokasi','Tanggal']].concat(DB.kkn.map((p,i)=>[i+1,p.nama,p.nim,p.prodi,p.lokasi,p.tgl])),'rekap-kkn-lppm-unbari');}
+function saveAgenda(){let j=document.getElementById('a_judul').value.trim();if(!j)return toast('Isi judul agenda');DB.agenda.unshift({judul:j,tgl:document.getElementById('a_tgl').value,ket:document.getElementById('a_ket').value});persist();renderAgenda();toast('Agenda ditambahkan');}
+function renderAgenda(){document.getElementById('agendaList').innerHTML=DB.agenda.map(a=>`<div class="card"><b>${a.judul}</b><br><span class="muted">${a.tgl} • ${a.ket}</span></div>`).join('');}
+updateStats();renderKegiatan();
+</script></body></html>
